@@ -20,7 +20,7 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
         split_nodes = []
         split_text = node.text.split(delimiter)
         if len(split_text) % 2 == 0:
-            raise Exception(f"Unmatched delimiter: {delimiter}")
+            raise ValueError(f"Unmatched delimiter: {delimiter}")
         for i, text_segment in enumerate(split_text):
             if text_segment == "":
                 continue

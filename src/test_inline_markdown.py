@@ -1,4 +1,5 @@
 import unittest
+import textwrap
 
 from inline_markdown import (
     split_nodes_delimiter,
