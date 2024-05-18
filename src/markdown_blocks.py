@@ -1,15 +1,15 @@
 import re
 from inline_markdown import text_to_textnodes
 from textnode import text_node_to_html_node
-from parentnode import ParentNode
+from htmlnode import ParentNode
 
 
 block_type_paragraph = "paragraph"
 block_type_heading = "heading"
 block_type_code = "code"
 block_type_quote = "quote"
-block_type_unordered_list = "unordered_list"
-block_type_ordered_list = "ordered_list"
+block_type_ulist = "unordered_list"
+block_type_olist = "ordered_list"
 
 
 def markdown_to_blocks(markdown):
@@ -40,9 +40,9 @@ def block_to_html_node(block):
         return heading_to_html_node(block)
     if block_type == block_type_quote:
         return quote_to_html_node(block)
-    if block_type == block_type_ordered_list:
+    if block_type == block_type_olist:
         return olist_to_html_node(block)
-    if block_type == block_type_unordered_list:
+    if block_type == block_type_ulist:
         return ulist_to_html_node(block)
     raise ValueError(f"Invalid block type: {block_type}")
 
@@ -57,9 +57,9 @@ def block_to_block_type(block):
     if all(line.startswith("> ") for line in lines):
         return block_type_quote
     if all(line.startswith("* ") or line.startswith("- ") for line in lines):
-        return block_type_unordered_list
+        return block_type_ulist
     if all(line.startswith(f"{i+1}. ") for i, line in enumerate(lines)):
-        return block_type_ordered_list
+        return block_type_olist
 
     return block_type_paragraph
 
